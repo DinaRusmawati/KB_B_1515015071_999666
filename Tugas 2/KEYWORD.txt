@@ -1,0 +1,121 @@
+Macam-macam Keyword/symbol pada prolog:
+
+1. Domains real digunakan untuk bilangan argumen bertipe real 
+dalam prolog untuk nilai pecahan ditulis di belakang tanda titik (.)
+2.WRITE( ) =  syntax digunakan untuk mencetak variabel string yang diapit dengan petik tunggal ( ‘ ).
+3.NL( ) = dikenal newline merupakan perintah untuk pindah menuju baris yang baru.
+4.READ( ) = syntax ini digunakan untuk memberikan nilai inputan pada variabel yang diberikan di dalam tanda kurung.
+5.% = syntax ini di gunakan untuk membuat sebuah komentar
+6."," = Syntax tanda koma ini sebagai tanda and atau dan
+7.":-" = Syntax untuk penggunaan jika maka
+8. is = Syntax variabel tugas atau deklarasi (tugas)
+9. "=" = syntax variabel tugas atau deklarasi (tugas)
+10. Pi is 3.14,  = Diberikan nilai awal terhadap variable Pi = 3.14.
+11. nama_menu = nama dan keseluruhan program pada menu
+12. forall = untuk setiap element yang melakukan sesuatu
+13. "_" = fungsi anonymous yaitu fungsi untuk menampilkan sesuatu dalam keadaan kosong atau tak tampil.
+14. ";" = syntax fungsi atau
+
+A. Keyword Facts
+Program Visual Prolog merupakan suatu koleksi dari sekumpulan fakta dan aturan. 
+Kadang ketika program sedang berjalan, 
+kita ingin meng-update (merubah, menambah, atau menghapus) beberapa fakta dari program. 
+Pada kasus ini fakta menjadi suatu database yang dinamis atau database internal, 
+dan fakta tersebut dapat berubah ketika program sedang berjalan. 
+Visual Prolog menyediakan section khusus untuk mendeklarasikan fakta di program yang 
+menjadi bagian dari database dinamis, yaitu section facts.
+Kata kunci facts untuk memulai section facts. 
+Visual Prolog menyediakan sejumlah predikat built-in yang mempermudah penggunaan 
+section fakta dinamis ini. Kata kunci facts dapat digantikan dengan kata kunci database, 
+untuk maksud yang sama. 
+
+B. Keyword Constants 
+Konstanta simbolis dapat digunakan di program Visual Prolog. 
+Untuk itu sebelumnya harus dideklarasikan terlebih dahulu. 
+Deklarasi konstanta diakukan pada section constants, 
+diikuti dengan deklarasi menggunakan sintak:
+<id> = <Macro_definition>
+<id> adalah nama dari konstanta simbolis dan <Macro_definition> 
+adalah apa yang akan diisikan (assign) kedalam konstanta. 
+Setiap <Macro_definition> diakhiri dengan baris baru. 
+Dengan demikian hanya ada satu deklarasi konstanta pada tiap barisnya. 
+Contoh:
+CONSTANT
+nol = 0
+satu = 1
+dua = 2
+ratus = (10*(10-1)+10)
+pi = 3.121592653
+Sistem tidak membedakan antara huruf besar dan huruf kecil pada deklarasi suatu konstanta. 
+Konsekuensinya, ketika suatu pengenal konstanta digunakan pada section clauses pada program, 
+huruf pertama harus huruf kecil untuk mencegah kerancuan antara konstanta dan variabel. 
+Berikut ini merupakan contoh yang valid:
+CONSTANTS
+Dua = 2
+GOAL
+A=dua, write(A).
+Deklarasi section constants bisa lebih dari satu kali dalam program, 
+namun deklarasi suatu konstanta harus dilakukan sebelum konstanta itu digunakan pada 
+section yang lain. Suatu konstanta hanya boleh dideklarasikan satu kali, 
+dan jika ada deklarasi lain untuk konstanta yang sama maka akan terjadi kesalahan.
+
+C. Keyword Global
+Visual Prolog memperbolehkan untuk mendeklarasikan beberapa domain, 
+predikat dan klausa menjadi global (daripada hanya lokal). 
+Caranya dengan menset secara terpisah section global domains, global predicates, 
+dan global facts pada bagian paling atas dari program. 
+
+D. Keyword Compiler Drectives 
+Visual Prolog mendukung compiler directives yang dapat ditambahkan ke 
+badan program untuk memberitahukan ke komputer bagaimana secara spesifik 
+memperlakukan kode-kode waktu di-compile. Untuk menset compiler directives 
+sebagian besar dilakukan melalui menu Options | Project | Compiler Options. 
+Modul ini tidak akan membahas secara detil mengenai compiler directives, 
+namun akan memperkenalkan salah satu diantaranya yaitu include directive.
+Kalau sudah terbiasa membuat program menggunakan Visual Prolog, 
+seringkali kita memakai suatu prosedur tertentu berulang kali, 
+sehingga setiap kali membuat program baru dan menggunakan prosedur tersebut, 
+prosedur tersebut harus diketikkan kembali. Untuk menghemat waktu, 
+maka dapat digunakan include directive. Contohnya:
+-        Buatlah file (misalnya MYPROC.PRO) yang berisikan deklarasi predikat yang 
+sering digunakan (menggunakan section domains dan section prtedicates ) dan menuliskan 
+prosedur yang didefinisikan pada predikat di section clauses.
+-        Buat program baru dan tuliskan kode:
+include “myproc.pro”
+di tempat di mana biasa dituliskan section domains, facts, predicates, clauses atau goal.
+Ketika program di-compile, Visual Prolog juga akan meng-compile isi dari file MYPROC.PRO.
+
+E. Keyword multiple arity
+Aritas (arity) suatu predikat adalah jumlah argumen yang ada pada predikat tersebut. 
+Visual Prolog memperbolehkan kita mempunyai 2 atau lebih predikat dengan nama yang 
+sama namun dengan aritas yang berbeda. Aritas yang berbeda dari nama predikat yang sama 
+harus dikelompokkan bersama baik pada section predicates maupun pada section clauses. 
+Perbedaan aritas oleh Visual Prolog akan diperlakukan secara berbeda pula. Contoh:
+DOMAINS
+orang = symbol
+PREDICATES
+ayah(orang) % orang ini adalah seorang ayah
+ayah(orang, orang) % orang 1 adalah ayah bagi yg ke-2
+CLAUSES
+ayah(Seseorang):-
+ayah(Seseorang, _).
+ayah(erwin, diena).
+ayah(erwin, latifah).
+
+F. Keyword Rules
+Rule pada Prolog adalah ketika kebenaran sebuah fakta tergantung pada kesukesan (kebenaran) 
+dari satu atau lebih fakta yang lain. 
+Seperti yang telah dijelaskan pada modul sebelumnya aturan terdiri dari 2 bagian 
+yaitu head dan body. Berikut ini merupakan aturan generik penulisan sintak rule 
+pada Visual Prolog:
+HEAD:- <subgoal>, <subgoal>, ..., <subgoal>.
+Bagian body dari rule terdiri dari satu atau lebih subgoal. 
+Setiap subgoal dipisahkan oleh koma, menspesifikasikan konjungsi, 
+dan subgoal terakhir diakhiri dengan tanda titik.
+Untuk membuat suatu Rule dikatakan sukses (benar), 
+Prolog harus memeriksa kebenaran dari setiap subgoal yang ada pada aturan tersebut. 
+Jika ada subgoal yang gagal (salah), 
+Prolog akan kembali ke atas dan mencari alternatif bagi subgoal yang paling awal, 
+kemudian kembali memproses dengan nilai variabel yang berbeda. 
+Ini dinamakan lacakbalik (backtracking). 
+Penjelasan yang lebih rinci mengenai lacakbalik akan diberikan pada modul yang lain.
